@@ -1,0 +1,76 @@
+<div class="language-selector flex items-center gap-2">
+  <button 
+    id="lang-en" 
+    class="cursor-pointer lang-btn px-2 py-1 rounded text-xs font-medium transition-all duration-300 hover:scale-105"
+    data-lang="en">
+    EN
+  </button>
+  <span class="text-white/50 text-xs">|</span>
+  <button 
+    id="lang-es" 
+    class="cursor-pointer lang-btn px-2 py-1 rounded text-xs font-medium transition-all duration-300 hover:scale-105"
+    data-lang="es">
+    ES
+  </button>
+</div>
+
+<script>
+  import { getCurrentLanguage, setLanguage } from '../../i18n/translations';
+
+  function updateLanguageButtons() {
+    const currentLang = getCurrentLanguage();
+    const buttons = document.querySelectorAll('.lang-btn');
+    
+    buttons.forEach(btn => {
+      const lang = btn.getAttribute('data-lang');
+      if (lang === currentLang) {
+        btn.classList.add('bg-amber-400', 'text-black');
+        btn.classList.remove('text-white', 'hover:bg-white/20');
+      } else {
+        btn.classList.remove('bg-amber-400', 'text-black');
+        btn.classList.add('text-white', 'hover:bg-white/20');
+      }
+    });
+  }
+
+  function initLanguageSelector() {
+    const buttons = document.querySelectorAll('.lang-btn');
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        if (lang) {
+          setLanguage(lang as 'en' | 'es');
+          updateLanguageButtons();
+          updatePageContent();
+        }
+      });
+    });
+
+    // Actualizar botones al cargar
+    updateLanguageButtons();
+  }
+
+  function updatePageContent() {
+    // Disparar evento para que otros componentes se actualicen
+    window.dispatchEvent(new CustomEvent('updateContent'));
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    // Pequeño delay para asegurar que el idioma se haya detectado correctamente
+    setTimeout(initLanguageSelector, 100);
+  });
+  
+  // Escuchar cambios de idioma
+  window.addEventListener('languageChanged', () => {
+    updateLanguageButtons();
+  });
+
+  // También inicializar cuando la página esté completamente cargada
+  window.addEventListener('load', () => {
+    if (document.readyState === 'complete') {
+      updateLanguageButtons();
+    }
+  });
+</script> 

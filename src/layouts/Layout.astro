@@ -1,22 +1,205 @@
+---
+import '../styles/global.css';
+import BgImage from '../assets/images/bg/bg-image.avif';
+import faChevronDown from '../assets/icons/chevron-down-solid.svg';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content="Nevits Developer - Software Engineer passionate about building web applications" />
+		<meta name="keywords" content="developer, software engineer, web applications, programming" />
+		<meta name="author" content="Nevits Developer" />
+		<title>Nevits Dev</title>
 	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+	<body class="overflow-x-hidden">
+        <canvas id="canvas" class="hero-canvas fixed top-0 left-0 object-cover -z-10 pointer-events-auto"></canvas>
+        
+        <!-- Loader para Spline -->
+        <div id="spline-loader" class="fixed top-20 right-4 z-40 opacity-0 transition-opacity duration-500 pointer-events-none">
+            <div class="flex items-center gap-3 px-4 py-2 bg-black/70 backdrop-blur-md rounded-full border border-white/20 shadow-lg">
+                <div class="relative">
+                    <div class="w-5 h-5 border-4 border-white/40 border-t-white rounded-full animate-spin"></div>
+                </div>
+                <span class="text-white font-semibold drop-shadow">Cargando modelo 3D...</span>
+            </div>
+        </div>
+        
+		<slot class="relative z-20" />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+		<!-- Global Navigation Buttons -->
+        <div id="section-nav" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 opacity-0 transition-opacity duration-300">
+            <button id="nav-up" onclick="window.scrollToPreviousSection?.()" class="cursor-pointer p-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-110 hover:border-white/20 rotate-180">
+                <img src={faChevronDown.src} alt="chevron-up" class="w-6 h-6" />
+            </button>
+            <button id="nav-down" onclick="window.scrollToNextSection?.()" class="cursor-pointer p-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-110 hover:border-white/20">
+                <img src={faChevronDown.src} alt="chevron-down" class="w-6 h-6" />
+            </button>
+        </div>
+	</body>
+	<!-- Importar scripts externos -->
+	<script type="module" src="/scripts/bg-glow.js"></script>
+	<script type="module" src="/scripts/section-nav.js"></script>
+	<script>
+		import { Application } from '@splinetool/runtime';
+		import { gsap } from 'gsap';
+		
+		let splineApp: any = null;
+		let isLoaded = false;
+
+		function runPerformanceBenchmark() {
+			const testIterations = 3;
+			let totalDuration = 0;
+			for (let i = 0; i < testIterations; i++) {
+				const t0 = performance.now();
+				const ops = 1_000_000;
+				let result = 0;
+				for (let j = 0; j < ops; j++) {
+					result += Math.sqrt(j) + Math.log(j + 1) + (j % 10);
+				}
+				const t1 = performance.now();
+				totalDuration += (t1 - t0);
+			}
+			const avgDuration = totalDuration / testIterations;
+			return avgDuration;
+		}
+
+		function isDevicePerformantEnough() {
+			const avg = runPerformanceBenchmark();
+			return avg < 250;
+		}
+
+		async function loadSplineCanvas() {
+			if (isLoaded) return;
+			const canvas = document.getElementById('canvas');
+			const loader = document.getElementById('spline-loader');
+			if (!(canvas instanceof HTMLCanvasElement)) {
+				console.error('Canvas element not found');
+				return;
+			}
+			try {
+				if (loader) {
+					loader.classList.remove('opacity-0');
+					loader.classList.add('opacity-100');
+					updateLoaderText('Inicializando modelo 3D...');
+				}
+				canvas.style.opacity = '0';
+				setTimeout(() => { if (loader) updateLoaderText('Descargando recursos...'); }, 500);
+				splineApp = new Application(canvas);
+				setTimeout(() => { if (loader) updateLoaderText('Renderizando escena...'); }, 1000);
+				await splineApp.load('https://prod.spline.design/Ml3Wz2gV4NlyvJeN/scene.splinecode');
+				if (loader) {
+					loader.classList.remove('opacity-100');
+					loader.classList.add('opacity-0');
+				}
+				gsap.to(canvas, { opacity: 1, duration: 1.5, ease: "power2.out" });
+				isLoaded = true;
+			} catch (error) {
+				console.error('Error loading Spline canvas:', error);
+				if (loader) {
+					loader.classList.remove('opacity-100');
+					loader.classList.add('opacity-0');
+				}
+				canvas.style.display = 'none';
+			}
+		}
+
+		function updateLoaderText(text: string) {
+			const loader = document.getElementById('spline-loader');
+			if (loader) {
+				const textElement = loader.querySelector('span');
+				if (textElement) {
+					textElement.textContent = text;
+				}
+			}
+		}
+
+		function cleanupSpline() {
+			if (splineApp) {
+				try {
+					splineApp.dispose();
+					splineApp = null;
+					isLoaded = false;
+					console.log('Spline resources cleaned up');
+				} catch (error) {
+					console.error('Error cleaning up Spline:', error);
+				}
+			}
+		}
+
+		function initLazySplineLoading() {
+			const canvas = document.getElementById('canvas');
+			if (!canvas) return;
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting && !isLoaded) {
+						loadSplineCanvas();
+						observer.disconnect();
+					}
+				});
+			}, {
+				rootMargin: '50px',
+				threshold: 0.1
+			});
+			observer.observe(canvas);
+		}
+
+		function shouldLoadSpline() {
+			const connection = (navigator as any).connection?.effectiveType;
+			const memory = (navigator as any).deviceMemory || 0;
+			if (connection === 'slow-2g' || connection === '2g') {
+				console.log('Skipping Spline load on slow network');
+				return false;
+			}
+			if (memory && memory < 2) {
+				console.log('Low memory reported. Verifying performance...');
+				if (!isDevicePerformantEnough()) {
+					console.log('Skipping Spline load: low memory + low performance');
+					return false;
+				}
+			}
+			if (!memory) {
+				console.log('No memory info available. Running performance benchmark...');
+				if (!isDevicePerformantEnough()) {
+					console.log('Skipping Spline load: unknown memory + low performance');
+					return false;
+				}
+			}
+			return true;
+		}
+
+		function initSplineCanvas() {
+			if (!shouldLoadSpline()) {
+				const canvas = document.getElementById('canvas');
+				if (canvas) canvas.style.display = 'none';
+				return;
+			}
+			if (document.visibilityState === 'visible') {
+				initLazySplineLoading();
+			} else {
+				document.addEventListener('visibilitychange', () => {
+					if (document.visibilityState === 'visible') {
+						initLazySplineLoading();
+					}
+				}, { once: true });
+			}
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initSplineCanvas);
+		} else {
+			initSplineCanvas();
+		}
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'hidden') {
+				// Optional cleanup when tab is hidden
+				// cleanupSpline();
+			}
+		});
+		window.addEventListener('beforeunload', cleanupSpline);
+	</script>
+</html>

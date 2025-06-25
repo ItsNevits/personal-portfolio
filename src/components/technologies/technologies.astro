@@ -1,0 +1,611 @@
+---
+import "./technologies.css";
+
+// Importar todos los iconos de tecnologías
+import TailwindIcon from "../../assets/icons/technologies/tailwindcss.svg";
+import PowerBIIcon from "../../assets/icons/technologies/power-bi.svg";
+import DataverseIcon from "../../assets/icons/technologies/dataverse.svg";
+import PowerAppsIcon from "../../assets/icons/technologies/power-apps.svg";
+import PowerAutomateIcon from "../../assets/icons/technologies/microsoft-power-automate.svg";
+import HTML5Icon from "../../assets/icons/technologies/html5.svg";
+import SQLServerIcon from "../../assets/icons/technologies/sql-server.svg";
+import NetFrameworkIcon from "../../assets/icons/technologies/net-framework.svg";
+import XamarinIcon from "../../assets/icons/technologies/xamarin.svg";
+import SassIcon from "../../assets/icons/technologies/sass.svg";
+import CSSIcon from "../../assets/icons/technologies/css.svg";
+import AstroIcon from "../../assets/icons/technologies/astro.svg";
+import JavaScriptIcon from "../../assets/icons/technologies/javascript.svg";
+import ReactIcon from "../../assets/icons/technologies/react-js.svg";
+import DynamicsCRMIcon from "../../assets/icons/technologies/microsoft-dynamics-crm.svg";
+
+const technologies = [
+  {
+    name: "React JS",
+    icon: ReactIcon,
+    projects: [
+      { 
+        name: { es: "Portfolio Personal", en: "Personal Portfolio" }, 
+        description: { es: "Portfolio desarrollado con React y Tailwind CSS", en: "Portfolio developed with React and Tailwind CSS" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#", 
+        detail: { es: "Este proyecto es un portfolio personal donde muestro mis trabajos, habilidades y contacto. Utiliza React para la interfaz y Tailwind CSS para el diseño responsivo y moderno.", en: "This project is a personal portfolio where I showcase my work, skills and contact. It uses React for the interface and Tailwind CSS for responsive and modern design." }
+      },
+      { 
+        name: { es: "E-commerce App", en: "E-commerce App" }, 
+        description: { es: "Aplicación de comercio electrónico con carrito de compras", en: "E-commerce application with shopping cart" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#", 
+        detail: { es: "Una tienda online con autenticación, gestión de productos y pagos. Permite a los usuarios comprar productos, ver su historial y administrar su cuenta.", en: "An online store with authentication, product management and payments. Allows users to buy products, view their history and manage their account." }
+      },
+      { 
+        name: { es: "Dashboard Admin", en: "Admin Dashboard" }, 
+        description: { es: "Panel de administración con gráficos y estadísticas", en: "Administration panel with charts and statistics" }, 
+        status: "Planificado", 
+        url: "#", 
+        github: "#", 
+        detail: { es: "Panel para visualizar métricas y estadísticas de ventas, usuarios y productos. Incluye gráficos interactivos y filtros avanzados.", en: "Panel to visualize sales, users and products metrics and statistics. Includes interactive charts and advanced filters." }
+      }
+    ]
+  },
+  {
+    name: "JavaScript",
+    icon: JavaScriptIcon,
+    projects: [
+      { 
+        name: { es: "API REST", en: "REST API" }, 
+        description: { es: "API RESTful para gestión de usuarios y productos", en: "RESTful API for user and product management" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Juego de Memoria", en: "Memory Game" }, 
+        description: { es: "Juego de memoria con animaciones y efectos", en: "Memory game with animations and effects" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Calculadora Avanzada", en: "Advanced Calculator" }, 
+        description: { es: "Calculadora con funciones matemáticas complejas", en: "Calculator with complex mathematical functions" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "HTML5",
+    icon: HTML5Icon,
+    projects: [
+      { 
+        name: { es: "Landing Page", en: "Landing Page" }, 
+        description: { es: "Página de aterrizaje responsive para empresa", en: "Responsive landing page for company" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Formulario de Contacto", en: "Contact Form" }, 
+        description: { es: "Formulario con validación HTML5 nativa", en: "Form with native HTML5 validation" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "CSS3",
+    icon: CSSIcon,
+    projects: [
+      { 
+        name: { es: "Animaciones CSS", en: "CSS Animations" }, 
+        description: { es: "Colección de animaciones y transiciones", en: "Collection of animations and transitions" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Grid Layout", en: "Grid Layout" }, 
+        description: { es: "Layouts responsivos usando CSS Grid", en: "Responsive layouts using CSS Grid" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Sass",
+    icon: SassIcon,
+    projects: [
+      { 
+        name: { es: "Framework CSS", en: "CSS Framework" }, 
+        description: { es: "Framework personalizado con variables y mixins", en: "Custom framework with variables and mixins" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Tailwind CSS",
+    icon: TailwindIcon,
+    projects: [
+      { 
+        name: { es: "Component Library", en: "Component Library" }, 
+        description: { es: "Biblioteca de componentes reutilizables", en: "Reusable component library" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Admin Template", en: "Admin Template" }, 
+        description: { es: "Template de administración con Tailwind", en: "Administration template with Tailwind" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Astro",
+    icon: AstroIcon,
+    projects: [
+      { 
+        name: { es: "Blog Personal", en: "Personal Blog" }, 
+        description: { es: "Blog estático con Astro y markdown", en: "Static blog with Astro and markdown" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: ".NET Framework",
+    icon: NetFrameworkIcon,
+    projects: [
+      { 
+        name: { es: "Sistema de Inventario", en: "Inventory System" }, 
+        description: { es: "Sistema completo de gestión de inventario", en: "Complete inventory management system" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Portal Web", en: "Web Portal" }, 
+        description: { es: "Portal corporativo con autenticación", en: "Corporate portal with authentication" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "SQL Server",
+    icon: SQLServerIcon,
+    projects: [
+      { 
+        name: { es: "Base de Datos ERP", en: "ERP Database" }, 
+        description: { es: "Base de datos para sistema ERP", en: "Database for ERP system" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Reportes BI", en: "BI Reports" }, 
+        description: { es: "Reportes de Business Intelligence", en: "Business Intelligence reports" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Power BI",
+    icon: PowerBIIcon,
+    projects: [
+      { 
+        name: { es: "Dashboard de Ventas", en: "Sales Dashboard" }, 
+        description: { es: "Dashboard interactivo de métricas de ventas", en: "Interactive sales metrics dashboard" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Reportes Financieros", en: "Financial Reports" }, 
+        description: { es: "Reportes automatizados de finanzas", en: "Automated financial reports" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Power Apps",
+    icon: PowerAppsIcon,
+    projects: [
+      { 
+        name: { es: "App de Gestión", en: "Management App" }, 
+        description: { es: "Aplicación para gestión de tareas", en: "Application for task management" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Portal de Clientes", en: "Client Portal" }, 
+        description: { es: "Portal para clientes con Power Apps", en: "Client portal with Power Apps" }, 
+        status: "Planificado", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Power Automate",
+    icon: PowerAutomateIcon,
+    projects: [
+      { 
+        name: { es: "Automatización de Procesos", en: "Process Automation" }, 
+        description: { es: "Flujos automatizados para procesos empresariales", en: "Automated flows for business processes" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Dataverse",
+    icon: DataverseIcon,
+    projects: [
+      { 
+        name: { es: "CRM Personalizado", en: "Custom CRM" }, 
+        description: { es: "Sistema CRM construido en Dataverse", en: "CRM system built in Dataverse" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Dynamics CRM",
+    icon: DynamicsCRMIcon,
+    projects: [
+      { 
+        name: { es: "Implementación CRM", en: "CRM Implementation" }, 
+        description: { es: "Implementación completa de Dynamics CRM", en: "Complete Dynamics CRM implementation" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      },
+      { 
+        name: { es: "Personalización Avanzada", en: "Advanced Customization" }, 
+        description: { es: "Personalizaciones y extensiones del CRM", en: "CRM customizations and extensions" }, 
+        status: "En desarrollo", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  },
+  {
+    name: "Xamarin",
+    icon: XamarinIcon,
+    projects: [
+      { 
+        name: { es: "App Móvil", en: "Mobile App" }, 
+        description: { es: "Aplicación móvil multiplataforma", en: "Cross-platform mobile application" }, 
+        status: "Completado", 
+        url: "#", 
+        github: "#" 
+      }
+    ]
+  }
+]
+
+// Configuración de estados con traducciones
+const STATUS_CONFIG = {
+  'Completado': { 
+    color: 'bg-green-500/20 text-green-400 border-green-500/30', 
+    icon: '✅',
+    text: { es: 'Completado', en: 'Completed' }
+  },
+  'En desarrollo': { 
+    color: 'bg-blue-500/20 text-blue-400 border-blue-500/30', 
+    icon: '🔄',
+    text: { es: 'En desarrollo', en: 'In Development' }
+  },
+  'Planificado': { 
+    color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30', 
+    icon: '📋',
+    text: { es: 'Planificado', en: 'Planned' }
+  }
+};
+---
+
+<section id="technologies" class="min-h-[100dvh] py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-amber-400 font-press-start mb-6" data-i18n="technologies.title">
+        Technologies
+      </h1>
+      <p class="text-base font-semibold sm:text-xl text-white max-w-3xl mx-auto" data-i18n="technologies.description">
+        Technologies and tools I've worked with throughout my career
+      </p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+
+      <!-- Sidebar con tecnologías -->
+      <div class="w-full lg:w-auto">
+
+        <div id="technologies-sidebar" class="flex justify-start w-full overflow-x-auto text-white px-2 py-2 gap-4 lg:h-[600px] lg:overflow-y-auto lg:overflow-x-hidden lg:flex-col lg:justify-center lg:items-center">
+
+          <!-- Tecnologías visibles inicialmente -->
+          <div id="technologies-list" class="flex gap-4 lg:flex-col">
+            {technologies.slice(0, 5).map((technology, index) => (
+              <div 
+                class="technology-tab flex flex-col justify-start items-center gap-2 cursor-pointer transition-all duration-300 hover:scale-105 p-3 rounded-lg hover:bg-white/5"
+                data-technology-index={index}
+              >
+                <img src={technology.icon.src} alt={technology.name} class="w-6 h-6" />
+                <span class="text-balance text-white text-sm text-center">{technology.name}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Tecnologías ocultas -->
+          <div id="hidden-technologies" class="gap-4 hidden lg:flex-col">
+            {technologies.slice(5).map((technology, index) => (
+              <div 
+                class="technology-tab flex flex-col justify-start items-center gap-2 cursor-pointer transition-all duration-300 hover:scale-105 p-3 rounded-lg hover:bg-white/5"
+                data-technology-index={index + 5}
+              >
+                <img src={technology.icon.src} alt={technology.name} class="w-6 h-6" />
+                <span class="text-balance text-white text-sm text-center">{technology.name}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Botón para mostrar/ocultar más tecnologías -->
+          <button 
+            id="show-more-btn" 
+            class="flex justify-start items-center gap-2 cursor-pointer group transition-all duration-300 hover:scale-110"
+          >
+            <div class="w-6 h-6 flex items-center justify-center">
+              <svg 
+                id="expand-icon"
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="text-amber-400 group-hover:text-amber-300 transition-colors duration-300"
+              >
+                <polyline points="6,9 12,15 18,9"></polyline>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contenido principal con proyectos -->
+      <div class="w-full">
+        <div id="projects-container" class="text-white">
+          <!-- Contenido por defecto -->
+          <div id="default-content" class="text-center py-20">
+            <div class="text-amber-400 text-6xl mb-4">👨‍💻</div>
+            <h2 class="text-2xl font-bold text-amber-400 mb-4" data-i18n="technologies.selectTechnology">Selecciona una tecnología</h2>
+            <p class="text-white" data-i18n="technologies.selectTechnologyDescription">Haz clic en cualquier tecnología para ver sus proyectos</p>
+          </div>
+
+          <!-- Contenedor para las cards de proyectos -->
+          <div id="projects-content" class="hidden">
+            <div class="mb-8">
+              <h2 id="technology-title" class="text-3xl font-bold text-amber-400 mb-2"></h2>
+              <p id="technology-description" class="text-white"></p>
+            </div>
+            
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Las cards se generarán dinámicamente -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ technologies, STATUS_CONFIG }} is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const hiddenTechnologies = document.getElementById('hidden-technologies');
+    const expandIcon = document.getElementById('expand-icon');
+    const technologyTabs = document.querySelectorAll('.technology-tab');
+    const defaultContent = document.getElementById('default-content');
+    const projectsContent = document.getElementById('projects-content');
+    const technologyTitle = document.getElementById('technology-title');
+    const technologyDescription = document.getElementById('technology-description');
+    const projectsGrid = document.getElementById('projects-grid');
+    
+    // Verificar que todos los elementos existan
+    if (!showMoreBtn || !hiddenTechnologies || !expandIcon || !defaultContent || !projectsContent || !technologyTitle || !technologyDescription || !projectsGrid) {
+      console.warn('Algunos elementos del DOM no se encontraron');
+      return;
+    }
+    let isExpanded = false;
+    let currentTechnologyIndex = null;
+    
+    // Listener para cambios de idioma
+    window.addEventListener('languageChanged', function() {
+      // Si hay una tecnología seleccionada, actualizar los proyectos
+      if (currentTechnologyIndex !== null) {
+        showTechnologyProjects(currentTechnologyIndex);
+      }
+    });
+    
+    // Funcionalidad para mostrar/ocultar más tecnologías
+    showMoreBtn.addEventListener('click', function() {
+      if (isExpanded) {
+        // Contraer
+        hiddenTechnologies.classList.add('hidden');
+        hiddenTechnologies.classList.remove('flex');
+        expandIcon.innerHTML = '<polyline points="6,9 12,15 18,9"></polyline>';
+      } else {
+        // Expandir
+        hiddenTechnologies.classList.remove('hidden');
+        hiddenTechnologies.classList.add('flex');
+        expandIcon.innerHTML = '<polyline points="18,15 12,9 6,15"></polyline>';
+      }
+      
+      isExpanded = !isExpanded;
+    });
+    
+    // Funcionalidad para mostrar proyectos de cada tecnología
+    technologyTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const technologyIndex = parseInt(this.getAttribute('data-technology-index') || '0');
+        
+        // Remover clase activa de todos los tabs
+        technologyTabs.forEach(t => t.classList.remove('bg-amber-400/20', 'border-amber-400/50', 'border'));
+        
+        // Agregar clase activa al tab seleccionado
+        this.classList.add('bg-amber-400/20', 'border-amber-400/50', 'border');
+        
+        // Mostrar proyectos de la tecnología seleccionada
+        showTechnologyProjects(technologyIndex);
+      });
+    });
+    
+    function showTechnologyProjects(index) {
+      const technology = technologies[index];
+      
+      if (!technology) return;
+      
+      currentTechnologyIndex = index;
+      
+      // Actualizar título y descripción
+      technologyTitle.textContent = technology.name;
+      technologyDescription.textContent = getTranslation('technologies.projectsWith') + ' ' + technology.name;
+      
+      // Generar cards de proyectos
+      projectsGrid.innerHTML = '';
+      
+      technology.projects.forEach(project => {
+        const projectCard = createProjectCard(project);
+        projectsGrid.appendChild(projectCard);
+      });
+      
+      // Mostrar contenido de proyectos y ocultar contenido por defecto
+      defaultContent.classList.add('hidden');
+      projectsContent.classList.remove('hidden');
+    }
+    
+    function createProjectCard(project) {
+      const card = document.createElement('div');
+      card.className = 'bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:border-amber-400/50 transition-all duration-300 hover:scale-105';
+      
+      const statusConfig = STATUS_CONFIG[project.status] || STATUS_CONFIG['Planificado'];
+      const currentLanguage = localStorage.getItem('language') || 'es';
+      
+      // Obtener textos traducidos
+      const projectName = typeof project.name === 'object' ? project.name[currentLanguage] : project.name;
+      const projectDescription = typeof project.description === 'object' ? project.description[currentLanguage] : project.description;
+      const projectDetail = project.detail ? (typeof project.detail === 'object' ? project.detail[currentLanguage] : project.detail) : '';
+      const statusText = statusConfig.text ? statusConfig.text[currentLanguage] : project.status;
+      
+      // Generar un id único para el detalle
+      const detailId = 'detail-' + Math.random().toString(36).substr(2, 9);
+      
+      card.innerHTML = `
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-balance text-lg font-semibold text-white">${escapeHtml(projectName)}</h3>
+          <span class="px-3 py-1 text-xs rounded-full whitespace-nowrap ${statusConfig.color} border">
+            ${statusConfig.icon} ${escapeHtml(statusText)}
+          </span>
+        </div>
+        <p class="text-gray-400 text-sm mb-4">${escapeHtml(projectDescription)}</p>
+        <button type="button" class="cursor-pointer toggle-detail-btn text-amber-400 hover:text-amber-300 text-sm font-medium transition-colors duration-300 mb-2" data-detail-id="${detailId}"></button>
+        <div id="${detailId}" class="project-detail text-gray-300 text-sm mb-4 max-h-0 overflow-hidden transition-all duration-500">
+          ${escapeHtml(projectDetail || 'Aquí irá el detalle largo de la aplicación, puedes personalizar este texto para cada proyecto.')}
+        </div>
+        <div class="flex justify-between items-center">
+          <div></div>
+          <div class="flex gap-2">
+            <a data-title="${getTranslation('technologies.viewProject')}" href="${project.url}" class="cursor-pointer p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors duration-300" aria-label="${getTranslation('technologies.viewProject')}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15,3 21,3 21,9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+            <a data-title="${getTranslation('technologies.viewGitHub')}" href="${project.github}" class="cursor-pointer p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors duration-300" aria-label="${getTranslation('technologies.viewGitHub')}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      `;
+      
+      // Lógica para mostrar/ocultar el detalle
+      const btn = card.querySelector('.toggle-detail-btn');
+      const detailDiv = card.querySelector(`#${detailId}`);
+      let expanded = false;
+
+      // ASIGNA EL TEXTO INICIAL SEGÚN EL ESTADO
+      btn.textContent = getTranslation('technologies.viewDetails');
+
+      btn.addEventListener('click', function() {
+        expanded = !expanded;
+        if (expanded) {
+          detailDiv.classList.remove('max-h-0', 'overflow-hidden');
+          detailDiv.classList.add('max-h-96', 'py-2');
+          btn.textContent = getTranslation('technologies.hideDetails');
+        } else {
+          detailDiv.classList.add('max-h-0', 'overflow-hidden');
+          detailDiv.classList.remove('max-h-96', 'py-2');
+          btn.textContent = getTranslation('technologies.viewDetails');
+        }
+      });
+      
+      return card;
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function getTranslation(key) {
+      const language = localStorage.getItem('language') || 'es';
+      const translations = {
+        es: {
+          'technologies.projectsWith': 'Proyectos con',
+          'technologies.viewDetails': 'Ver Detalles',
+          'technologies.hideDetails': 'Ocultar Detalles',
+          'technologies.viewProject': 'Ver Proyecto',
+          'technologies.viewGitHub': 'Ver en GitHub',
+          'technologies.selectTechnology': 'Selecciona una tecnología',
+          'technologies.selectTechnologyDescription': 'Haz clic en cualquier tecnología para ver sus proyectos'
+        },
+        en: {
+          'technologies.projectsWith': 'Projects with',
+          'technologies.viewDetails': 'View Details',
+          'technologies.hideDetails': 'Hide Details',
+          'technologies.viewProject': 'View Project',
+          'technologies.viewGitHub': 'View on GitHub',
+          'technologies.selectTechnology': 'Select Technology',
+          'technologies.selectTechnologyDescription': 'Click on any technology to see its projects'
+        }
+      };
+      return translations[language][key] || key;
+    }
+  });
+</script>

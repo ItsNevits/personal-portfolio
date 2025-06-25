@@ -1,0 +1,177 @@
+---
+import LanguageSelector from '../language-selector/language-selector.astro';
+---
+
+<header id="header" class="select-none fixed top-0 left-0 right-0 z-50 flex justify-between items-center mx-2 sm:mx-4 md:mx-8 my-2 sm:my-4 rounded-lg bg-black/80 py-2 sm:py-3 px-2 md:bg-black/40 sm:px-3 text-white backdrop-blur-sm transition-all duration-300">
+	<a href="#about" class="font-bold ml-1 sm:ml-3 cursor-pointer select-none font-press-start text-sm sm:text-base hover:text-amber-300 transition-all duration-300">Nevits</a>
+    
+    <!-- Menú de navegación para desktop -->
+    <nav class="hidden md:block">
+        <ul class="flex gap-2 lg:gap-4">
+            <li class="rounded-full px-2 cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
+                <a href="#about" class="text-amber-400 font-boldtext-sm lg:text-base" data-i18n="header.home">home</a>
+            </li>
+            <li class="rounded-full px-2 cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
+                <a href="#technologies" class="text-sm lg:text-base" data-i18n="header.technologies">technologies</a>
+            </li>
+            <li class="rounded-full px-2 cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
+                <a href="#contact" class="text-sm lg:text-base" data-i18n="header.contact">contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Selector de idioma para desktop -->
+    <div class="hidden md:block">
+        <LanguageSelector />
+    </div>
+
+    <!-- Botón hamburguesa para móvil -->
+    <button id="mobile-menu-btn" class="md:hidden p-2 hover:bg-white/20 rounded-lg transition-all duration-300">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="fixed top-full left-0 right-0 bg-black/80 backdrop-blur-sm transform translate-y-0 opacity-0 pointer-events-none transition-all duration-300 md:hidden">
+        <nav class="p-4 mt-2">
+            <ul class="flex flex-col gap-2">
+                <li class="rounded-lg px-4 py-2 cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
+                    <a href="#about" class="block text-center" data-i18n="header.home">home</a>
+                </li>
+                <li class="rounded-lg px-4 py-2 cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
+                    <a href="#technologies" class="block text-center" data-i18n="header.technologies">technologies</a>
+                </li>
+                <li class="rounded-lg px-4 py-2 cursor-pointer hover:bg-white hover:text-black transition-all duration-300">
+                    <a href="#contact" class="block text-center" data-i18n="header.contact">contact</a>
+                </li>
+                <!-- Selector de idioma para móvil -->
+                <li class="flex justify-center mt-4">
+                    <LanguageSelector />
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<script>
+    import { getTranslation } from '../../i18n/translations';
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const header = document.getElementById('header');
+    let isMenuOpen = false;
+
+    // Función para actualizar traducciones
+    function updateTranslations() {
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (key) {
+                const translation = getTranslation(key);
+                element.textContent = translation;
+            }
+        });
+    }
+
+    mobileMenuBtn?.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
+            mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
+            header?.classList.remove('rounded-lg');
+            header?.classList.add('rounded-t-lg');
+        } else {
+            mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
+            mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
+            header?.classList.remove('rounded-t-lg');
+            header?.classList.add('rounded-lg');
+        }
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    const mobileLinks = mobileMenu?.querySelectorAll('a');
+    mobileLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+            isMenuOpen = false;
+            mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
+            mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
+            header?.classList.remove('rounded-t-lg');
+            header?.classList.add('rounded-lg');
+        });
+    });
+
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', (e) => {
+        const target = e.target as Node;
+        if (isMenuOpen && mobileMenu && !mobileMenu.contains(target) && !mobileMenuBtn?.contains(target)) {
+            isMenuOpen = false;
+            mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+            header?.classList.remove('rounded-t-lg');
+            header?.classList.add('rounded-lg');
+        }
+    });
+
+    // Función para el scroll suave y manejo del enlace activo
+    function setupSmoothScrolling() {
+        const navLinks = document.querySelectorAll('nav a[href^="#"], a[href="#about"]');
+
+        const handleClick = function(this: HTMLAnchorElement, e: MouseEvent) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (!targetId) return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+
+                if (isMenuOpen) {
+                    mobileMenuBtn?.click();
+                }
+            }
+        };
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', handleClick as EventListener);
+        });
+    }
+
+    // Función para actualizar el enlace activo en el scroll
+    function updateActiveLinkOnScroll() {
+        const sections = document.querySelectorAll<HTMLElement>('section[id]');
+        const navLinks = document.querySelectorAll<HTMLAnchorElement>('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id') || '';
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-amber-400', 'font-bold');
+                const href = link.getAttribute('href');
+                if (href && href.substring(1) === current) {
+                    link.classList.add('text-amber-400', 'font-bold');
+                }
+            });
+        });
+    }
+
+    // Escuchar cambios de idioma
+    window.addEventListener('updateContent', updateTranslations);
+    window.addEventListener('languageChanged', updateTranslations);
+
+    // Inicializar todo al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTranslations();
+        setupSmoothScrolling();
+        updateActiveLinkOnScroll();
+    });
+</script>

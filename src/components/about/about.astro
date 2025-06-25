@@ -1,0 +1,203 @@
+---
+import InstagramIcon from "../../assets/icons/instagram.svg";
+import LinkedinIcon from "../../assets/icons/linkedin.svg";
+import CvIcon from "../../assets/icons/cv.png";
+---
+
+<section id="about" class="flex flex-col items-center justify-center min-h-[100dvh] px-4 sm:px-6 lg:px-8">
+    <article id="about-content" class="relative flex flex-col items-center justify-center text-center max-w-full mx-auto opacity-0">
+        <h1 id="title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-amber-400 font-press-start mb-4 sm:mb-6 lg:mb-8 leading-tight" data-i18n="about.title">
+            Nevits Developer
+        </h1>
+        <p id="description" class="text-base sm:text-lg md:text-xl text-white font-semibold max-w-2xl mx-auto leading-relaxed mb-8" data-i18n="about.description">
+            I'm a software engineer with a passion for building web applications.
+        </p>
+        
+        <!-- Redes sociales con gradientes -->
+        <div id="social-links" class="flex items-center gap-4 sm:gap-6">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/brian.nevits/" target="_blank" data-title="Instagram"
+               class="p-3 rounded-full group bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 hover:from-purple-500 hover:via-pink-400 hover:to-orange-300 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/25">
+                <img src={InstagramIcon.src} alt="Instagram" class="select-none w-6 h-6 sm:w-8 sm:h-8 group-hover:scale-110 transition-all duration-300" />
+            </a>
+            
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/brian-stiven-alvarado-soto-a81636196/" target="_blank" data-title="Linkedin"
+               class="p-3 rounded-full group bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25">
+                <img src={LinkedinIcon.src} alt="Linkedin" class="select-none w-6 h-6 sm:w-8 sm:h-8 group-hover:scale-110 transition-all duration-300" />
+            </a>
+            
+            <!-- CV Download -->
+            <button id="download-cv-btn" data-title="Download CV"
+                    class="p-3 rounded-full group bg-gradient-to-br from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-emerald-500/25 cursor-pointer">
+                <img src={CvIcon.src} alt="Download CV" class="select-none w-6 h-6 sm:w-8 sm:h-8 group-hover:scale-110 transition-all duration-300" />
+            </button>
+        </div>
+    </article>
+</section>
+
+<script>
+    import { gsap } from 'gsap';
+    import { getTranslation } from '../../i18n/translations';
+
+    // Función para descargar CV - movida al ámbito global
+    (window as any).downloadCV = function() {
+        const link = document.createElement('a');
+        link.href = '/Nevits_CV.pdf';
+        link.download = 'Nevits_CV.pdf';
+        link.target = '_blank';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showNotification(getTranslation('about.cvDownloaded'));
+    }
+    
+    function showNotification(message: string) {
+        const notification = document.createElement('div');
+        notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300';
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // Función para actualizar traducciones
+    function updateTranslations() {
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (key) {
+                const translation = getTranslation(key);
+                element.textContent = translation;
+            }
+        });
+    }
+
+    // Agregar event listener para el botón de descarga
+    function setupDownloadButton() {
+        const downloadBtn = document.getElementById('download-cv-btn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', (window as any).downloadCV);
+        }
+    }
+
+    // Animación de gota de agua con GSAP
+    function initWaterDropAnimation() {
+        const tl = gsap.timeline({
+            delay: 0.1,
+            ease: "power2.out"
+        });
+
+        // Contenedor principal - efecto de gota de agua
+        tl.fromTo("#about-content", 
+            {
+                scale: 0,
+                opacity: 0,
+                y: -100,
+                rotation: -15
+            },
+            {
+                scale: 1,
+                opacity: 1,
+                y: 0,
+                rotation: 0,
+                duration: 0.8,
+                ease: "elastic.out(1, 0.5)"
+            }
+        );
+
+        // Título - aparece con efecto de rebote
+        tl.fromTo("#title",
+            {
+                scale: 0.8,
+                opacity: 0,
+                y: -20
+            },
+            {
+                scale: 1,
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "back.out(1.7)"
+            },
+            "-=0.6"
+        );
+
+        // Descripción - aparece con efecto de deslizamiento
+        tl.fromTo("#description",
+            {
+                opacity: 0,
+                y: 30,
+                scale: 0.9
+            },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.4,
+                ease: "power2.out"
+            },
+            "-=0.4"
+        );
+
+        // Enlaces sociales - aparecen uno por uno con efecto de gota
+        tl.fromTo("#social-links a, #social-links button",
+            {
+                scale: 0,
+                opacity: 0,
+                y: 50,
+                rotation: 180
+            },
+            {
+                scale: 1,
+                opacity: 1,
+                y: 0,
+                rotation: 0,
+                duration: 0.3,
+                ease: "back.out(1.7)",
+                stagger: 0.15
+            },
+            "-=0.3"
+        );
+
+        // Efecto de ondas después de la animación principal
+        tl.to("#about-content", {
+            scale: 1.02,
+            duration: 0.4,
+            ease: "power2.inOut"
+        })
+        .to("#about-content", {
+            scale: 1,
+            duration: 0.4,
+            ease: "power2.inOut"
+        });
+    }
+
+    // Inicializar animación cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTranslations();
+        initWaterDropAnimation();
+        setupDownloadButton();
+    });
+
+    // También inicializar cuando la página esté completamente cargada
+    window.addEventListener('load', () => {
+        if (document.readyState === 'complete') {
+            updateTranslations();
+            initWaterDropAnimation();
+            setupDownloadButton();
+        }
+    });
+
+    // Escuchar cambios de idioma
+    window.addEventListener('updateContent', updateTranslations);
+    window.addEventListener('languageChanged', updateTranslations);
+</script>

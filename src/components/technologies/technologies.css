@@ -1,0 +1,53 @@
+#technologies-sidebar {
+  /* Estilos para la barra de scroll */
+  scrollbar-width: thin;
+  scrollbar-color: #00ffcc22 rgba(0, 0, 0, 0.1);
+}
+
+#technologies-sidebar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+#technologies-sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 4px;
+}
+
+#technologies-sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.8));
+  border-radius: 10px;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  transition: all 0.3s ease;
+}
+
+#technologies-sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.8), rgba(245, 158, 11, 1));
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+}
+
+#technologies-sidebar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Estilos adicionales para mejorar la experiencia */
+#technologies-sidebar {
+  /* Suavizar el scroll */
+  scroll-behavior: smooth;
+  
+  /* Ocultar scroll en dispositivos móviles pero mantener funcionalidad */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Animación sutil para el thumb al hacer scroll */
+@keyframes scrollGlow {
+  0% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.2); }
+  50% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.4); }
+  100% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.2); }
+}
+
+#technologies-sidebar::-webkit-scrollbar-thumb:active {
+  animation: scrollGlow 1s ease-in-out infinite;
+}

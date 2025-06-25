@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@theme {
+  --font-press-start: 'Press Start 2P', monospace;
+  --font-noto-sans: 'Noto Sans', sans-serif;
+}
+
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('/fonts/PressStart2P.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('/fonts/NotoSansDisplay.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: var(--font-noto-sans);
+  scroll-behavior: smooth;
+  background: linear-gradient(120deg, #000 0%, #111 60%, #00ffcc22 100%);
+  background-color: black;
+  background-size: 200% 200%;
+  animation: bgMove 8s ease-in-out infinite alternate;
+  transition: background 0.6s;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--glow-x, 60%) var(--glow-y, 30%), #00ffcc33 0%, transparent 20%);
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+
+body:hover::before {
+  opacity: 0.8;
+  background: radial-gradient(circle at var(--glow-x, 60%) var(--glow-y, 30%), #00ffcc66 0%, transparent 20%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, #00ffcc33 1px, transparent 1px),
+    radial-gradient(circle, #fff2 1px, transparent 1px);
+  background-size: 80px 80px, 120px 120px;
+  background-position: 0 0, 40px 40px;
+  opacity: 0.2;
+  transition: opacity 0.5s;
+}
+
+body:hover::after {
+  opacity: 0.4;
+}
+
+/* Mejoras para dispositivos móviles */
+@media (max-width: 640px) {
+  .font-press-start {
+    font-size: clamp(1rem, 8vw, 1rem);
+  }
+}
+
+/* Prevenir zoom en inputs en iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
+/* Estilos para navegación entre secciones */
+.section-nav-button {
+  @apply fixed z-40 p-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300;
+}
+
+.section-nav-button:hover {
+  @apply scale-110 border-white/20;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(0.55);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.55);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0.55);
+  }
+  100% {
+    transform: scale(0.55);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Tooltip personalizado para elementos con data-title */
+[data-title] {
+  position: relative;
+}
+
+[data-title]:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #000 0%, #111 50%, #00ffcc22 100%);
+  border: 1px solid #00ffcc66;
+  border-radius: 6px;
+  color: #00ffcc;
+  font-family: var(--font-noto-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  animation: tooltipFadeIn 0.3s ease-out forwards;
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 4px 20px rgba(0, 255, 204, 0.2),
+    0 0 0 1px rgba(0, 255, 204, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+}
+
+[data-title]:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #00ffcc66;
+  margin-bottom: -6px;
+  z-index: 1000;
+  opacity: 0;
+  animation: tooltipFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes tooltipFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Mejoras para dispositivos móviles */
+@media (max-width: 640px) {
+  [data-title]:hover::after {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    max-width: 200px;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+
+/* Tooltips solo en desktop */
+@media (max-width: 1023px) {
+  [data-title]::after, [data-title]::before {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+

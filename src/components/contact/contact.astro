@@ -1,0 +1,255 @@
+<section id="contact" class="flex flex-col items-center justify-center min-h-[100dvh] px-4 sm:px-6 lg:px-8 py-16">
+    <div class="w-full max-w-4xl mx-auto">
+        <!-- Título de la sección -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 font-press-start mb-4" data-i18n="contact.title">
+                Contáctame
+            </h2>
+            <p class="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto" data-i18n="contact.subtitle">
+                ¿Tienes un proyecto en mente? ¡Hablemos sobre cómo puedo ayudarte a hacerlo realidad!
+            </p>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="bg-black/20 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10">
+            <form id="contact-form" class="space-y-6">
+                <!-- Nombre y Email en la misma fila -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label for="name" class="block text-sm font-semibold text-amber-400" data-i18n="contact.name">
+                            Nombre
+                        </label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            required
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300"
+                            data-i18n-placeholder="contact.placeholderName"
+                            placeholder="Tu nombre"
+                        />
+                    </div>
+                    <div class="space-y-2">
+                        <label for="email" class="block text-sm font-semibold text-amber-400" data-i18n="contact.email">
+                            Email
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300"
+                            data-i18n-placeholder="contact.placeholderEmail"
+                            placeholder="tu@email.com"
+                        />
+                    </div>
+                </div>
+
+                <!-- Asunto -->
+                <div class="space-y-2">
+                    <label for="subject" class="block text-sm font-semibold text-amber-400" data-i18n="contact.subject">
+                        Asunto
+                    </label>
+                    <input 
+                        type="text" 
+                        id="subject" 
+                        name="subject" 
+                        required
+                        class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300"
+                        data-i18n-placeholder="contact.placeholderSubject"
+                        placeholder="¿En qué puedo ayudarte?"
+                    />
+                </div>
+
+                <!-- Mensaje -->
+                <div class="space-y-2">
+                    <label for="message" class="block text-sm font-semibold text-amber-400" data-i18n="contact.message">
+                        Mensaje
+                    </label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        rows="6" 
+                        required
+                        class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 resize-none"
+                        data-i18n-placeholder="contact.placeholderMessage"
+                        placeholder="Cuéntame más sobre tu proyecto..."
+                    ></textarea>
+                </div>
+
+                <!-- Botón de envío -->
+                <div class="text-center">
+                    <button 
+                        type="submit" 
+                        id="submit-btn"
+                        class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-black"
+                    >
+                        <span id="submit-text" data-i18n="contact.send">Enviar Mensaje</span>
+                        <svg id="submit-icon" class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                        <div id="loading-spinner" class="ml-2 w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin hidden"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="mt-12 text-center">
+            <p class="text-white/60 text-sm" data-i18n="contact.alternative">
+                También puedes contactarme directamente en:
+            </p>
+            <div class="flex justify-center items-center gap-6 mt-4">
+                <a href="mailto:brian.alvarado21@gmail.com" class="text-amber-400 hover:text-amber-300 transition-colors duration-300">
+                    brian.alvarado21@gmail.com
+                </a>
+                <span class="text-white/40">|</span>
+                <a href="https://www.linkedin.com/in/brian-stiven-alvarado-soto-a81636196/" target="_blank" class="text-amber-400 hover:text-amber-300 transition-colors duration-300">
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { getTranslation } from '../../i18n/translations';
+
+    // Configuración de EmailJS desde variables de entorno
+    const EMAILJS_SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+    const EMAILJS_TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+    const EMAILJS_PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+    
+    // Verificar que las variables de entorno estén configuradas
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+        console.error('Error: Las variables de entorno de EmailJS no están configuradas. Verifica tu archivo .env');
+    }
+
+    // Función para mostrar notificaciones
+    function showNotification(message: string, type: 'success' | 'error' = 'success') {
+        const notification = document.createElement('div');
+        const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+        notification.className = `fixed top-20 left-1/2 transform -translate-x-1/2 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 4000);
+    }
+
+    // Función para actualizar traducciones
+    function updateTranslations() {
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (key) {
+                const translation = getTranslation(key);
+                element.textContent = translation;
+            }
+        });
+
+        // Actualizar placeholders
+        const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+        placeholderElements.forEach(element => {
+            const key = element.getAttribute('data-i18n-placeholder');
+            if (key) {
+                const translation = getTranslation(key);
+                (element as HTMLInputElement | HTMLTextAreaElement).placeholder = translation;
+            }
+        });
+    }
+
+    // Función para manejar el envío del formulario
+    async function handleSubmit(e: Event) {
+        e.preventDefault();
+        
+        const form = e.target as HTMLFormElement;
+        const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+        const submitText = document.getElementById('submit-text') as HTMLElement;
+        const submitIcon = document.getElementById('submit-icon') as HTMLElement;
+        const loadingSpinner = document.getElementById('loading-spinner') as HTMLElement;
+
+        // Obtener datos del formulario
+        const formData = new FormData(form);
+        const templateParams = {
+            from_name: formData.get('name'),
+            from_email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message')
+        };
+
+        // Mostrar estado de carga
+        submitBtn.disabled = true;
+        submitText.textContent = getTranslation('contact.sending') || 'Enviando...';
+        submitIcon.classList.add('hidden');
+        loadingSpinner.classList.remove('hidden');
+
+        try {
+            // Verificar si EmailJS está cargado
+            if (typeof (window as any).emailjs === 'undefined') {
+                throw new Error('EmailJS no está cargado. Verifica que el script esté incluido.');
+            }
+
+            // Enviar email usando EmailJS
+            await (window as any).emailjs.send(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                templateParams,
+                EMAILJS_PUBLIC_KEY
+            );
+
+            // Éxito
+            showNotification(getTranslation('contact.success') || '¡Mensaje enviado con éxito!');
+            form.reset();
+            
+        } catch (error) {
+            console.error('Error al enviar el email:', error);
+            showNotification(
+                getTranslation('contact.error') || 'Error al enviar el mensaje. Inténtalo de nuevo.',
+                'error'
+            );
+        } finally {
+            // Restaurar estado del botón
+            submitBtn.disabled = false;
+            submitText.textContent = getTranslation('contact.send') || 'Enviar Mensaje';
+            submitIcon.classList.remove('hidden');
+            loadingSpinner.classList.add('hidden');
+        }
+    }
+
+    // Función para inicializar el formulario
+    function initContactForm() {
+        const form = document.getElementById('contact-form') as HTMLFormElement;
+        if (form) {
+            form.addEventListener('submit', handleSubmit);
+        }
+    }
+
+    // Función para cargar EmailJS
+    function loadEmailJS() {
+        if (typeof (window as any).emailjs === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+            script.onload = () => {
+                (window as any).emailjs.init(EMAILJS_PUBLIC_KEY);
+            };
+            document.head.appendChild(script);
+        }
+    }
+
+    // Inicializar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTranslations();
+        initContactForm();
+        loadEmailJS();
+    });
+
+    // Escuchar cambios de idioma
+    window.addEventListener('updateContent', updateTranslations);
+    window.addEventListener('languageChanged', updateTranslations);
+</script> 
