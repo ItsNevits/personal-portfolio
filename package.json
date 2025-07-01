@@ -10,7 +10,6 @@
     "setup-env": "node setup-env.js"
   },
   "dependencies": {
-    "@splinetool/runtime": "^1.10.13",
     "@tailwindcss/vite": "^4.1.10",
     "astro": "^5.10.0",
     "gsap": "^3.13.0",

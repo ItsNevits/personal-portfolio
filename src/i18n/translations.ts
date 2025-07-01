@@ -65,7 +65,7 @@ export const translations: Record<Language, Translations> = {
     },
     about: {
       title: 'Nevits Developer',
-      description: "I'm a software engineer with a passion for building web applications.",
+      description: "Full Stack Developer with over 5 years of experience in designing, developing, and implementing robust technological solutions. Specialized in building scalable web applications, efficient system integrations, and optimized user experiences, delivering value across both frontend and backend development.",
       downloadCV: 'Download CV',
       cvDownloaded: 'CV downloaded successfully!'
     },
@@ -118,7 +118,7 @@ export const translations: Record<Language, Translations> = {
     },
     about: {
       title: 'Nevits Developer',
-      description: 'Soy un ingeniero de software apasionado por construir aplicaciones web.',
+      description: 'Desarrollador Full Stack con más de 5 años de experiencia en el diseño, desarrollo e implementación de soluciones tecnológicas robustas. Especializado en la creación de aplicaciones web escalables, integraciones eficientes y experiencias de usuario optimizadas, aportando valor tanto en el frontend como en el backend.',
       downloadCV: 'Descargar CV',
       cvDownloaded: '¡CV descargado correctamente!'
     },
